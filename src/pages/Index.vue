@@ -37,7 +37,7 @@
           <li class="checkmark">
             <div>Project Qodo</div>
             <div class="text-lg text-gray-600">
-              An open-source productivity app that also serves as a learning resource for building multi-platform apps using Quasar. Available in both desktop and mobile. Visit the <a href="https://www.getenfocus.com" target="_blank">live version here.</a> Check the <a href="https://github.com/vycoder/qodo" target="_blank">Github Repo</a>.
+              An open-source productivity app that also serves as a learning resource for building multi-platform apps using Quasar. Available in both desktop and mobile. Visit the <a href="https://www.getenfocus.com" target="_blank">live version here.</a> Check the <a href="https://github.com/yvhr/qodo" target="_blank">Github Repo</a>.
             </div>
           </li>
           <li class="checkmark">
