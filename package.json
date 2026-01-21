@@ -20,7 +20,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "vite": "^7.1.2",
+    "vite": "^7.1.11",
     "@html-eslint/eslint-plugin": "^0.25.0",
     "@html-eslint/parser": "^0.25.0",
     "eslint": "^8.57.0",
