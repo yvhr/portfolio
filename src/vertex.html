@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vertex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .vertex-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;
+        padding: 2rem 0;
+      }
+      .vertex-content img {
+        position: static;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 70vh;
+        opacity: 1;
+        z-index: auto;
+        pointer-events: auto;
+        border-radius: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/" class="site-title">
+            <span class="prompt-user">yev</span>
+            <span class="prompt-at">@</span>
+            <span class="prompt-host">localhost</span>
+            <span class="prompt-symbol">:</span>
+            <span class="prompt-path">~</span>
+            <span class="prompt-symbol">$</span>
+          </a>
+          <nav>
+            <a href="/#about">about</a>
+            <a href="/#work">work</a>
+            <a href="/#contact">contact</a>
+            <a href="https://medium.com/@yhev" target="_blank" rel="noreferrer"
+              >blog</a
+            >
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              <span id="themeIcon">[dark]</span>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <div class="vertex-content">
+          <p class="text-comment" id="fortune">Loading fortune...</p>
+          <img src="/dancingkitty.gif" alt="dancing kitty" />
+        </div>
+      </main>
+
+      <footer>
+        <div class="footer-content">
+          <div class="copyright">EOF &copy; <span id="currentYear"></span></div>
+          <div class="build-info">
+            Last-Modified: <span id="lastModified">2025-08-17</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./scripts.js"></script>
+    <script>
+      fetch('https://api.adviceslip.com/advice', { cache: 'no-cache' })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          document.getElementById('fortune').textContent = data.slip.advice;
+        })
+        .catch(function () {
+          document.getElementById('fortune').textContent =
+            'The fortune cookie was empty.';
+        });
+    </script>
+  </body>
+</html>

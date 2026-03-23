@@ -4,7 +4,7 @@
 
 ## Change History
 
-- 8/19/2020
+- 8/19/2025
   - version 7: Another redesign. Simplified. Minimalist.
 - 7/17/2020
   - version 6: Re-implemented using gridsome. Using [andre-madarang](https://andremadarang.com/)'s [starter kit](https://github.com/drehimself/gridsome-portfolio-starter).
