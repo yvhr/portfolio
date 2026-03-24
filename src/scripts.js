@@ -31,10 +31,7 @@ themeToggle.addEventListener('click', () => {
   updateIcon(newTheme);
 });
 
-// Set last modified date and current year
-document.getElementById('lastModified').textContent = new Date()
-  .toISOString()
-  .split('T')[0];
+// Set current year
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 // Smooth scroll for anchor links
