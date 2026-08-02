@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import { writingPlugin } from './writing.js';
 
 const contactLinks = [
-  { label: 'Email', href: 'mailto:josephharveyangeles@gmail.com' },
   { label: 'GitHub', href: 'https://github.com/yvhr' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/josephharveyangeles' },
   { label: 'X', href: 'https://x.com/yev' },

@@ -72,3 +72,98 @@ if (clock) {
   tick();
   setInterval(tick, 30000);
 }
+
+/* --------------------------------------------------------------------------
+   Contact form — Netlify Forms
+
+   The markup is authored statically in index.html, never generated here:
+   Netlify detects forms by parsing the built HTML at deploy time, so anything
+   JavaScript creates is invisible to it.
+   -------------------------------------------------------------------------- */
+
+(function contactForm() {
+  const form = document.querySelector('[data-contact-form]');
+  const sent = document.querySelector('[data-contact-sent]');
+  if (!form || !sent) return;
+
+  const submit = form.querySelector('[data-submit]');
+  const alertBox = form.querySelector('[data-form-alert]');
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const rules = {
+    name: v => (v.trim() ? '' : 'Tell me who you are.'),
+    email: v => {
+      if (!v.trim()) return 'I need an address to reply to.';
+      return EMAIL.test(v.trim()) ? '' : "That address doesn't look right.";
+    },
+    message: v => (v.trim() ? '' : 'Even one line helps.'),
+  };
+
+  const fields = Object.keys(rules)
+    .map(name => ({
+      name,
+      input: form.elements[name],
+      error: form.querySelector(`#err-${name}`),
+    }))
+    .filter(f => f.input && f.error);
+
+  const paint = (f, msg) => {
+    f.error.textContent = msg;
+    f.error.hidden = !msg;
+    f.input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  };
+
+  const validate = f => {
+    const msg = rules[f.name](f.input.value);
+    paint(f, msg);
+    return !msg;
+  };
+
+  fields.forEach(f => {
+    f.input.addEventListener('blur', () => validate(f));
+    // Typing may clear an error but must never create one — validating on
+    // keystroke shouts at someone halfway through typing their address.
+    f.input.addEventListener('input', () => {
+      if (f.input.getAttribute('aria-invalid') === 'true') {
+        if (!rules[f.name](f.input.value)) paint(f, '');
+      }
+    });
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    // aria-disabled, not disabled: a disabled button drops keyboard focus to
+    // <body> and strands whoever just pressed Enter on it.
+    if (submit.getAttribute('aria-disabled') === 'true') return;
+
+    alertBox.hidden = true;
+    const invalid = fields.filter(f => !validate(f));
+    if (invalid.length) {
+      invalid[0].input.focus();
+      return;
+    }
+
+    submit.setAttribute('aria-disabled', 'true');
+    submit.setAttribute('aria-busy', 'true');
+    submit.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(location.pathname, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.hidden = true;
+      sent.hidden = false;
+      sent.focus();
+    } catch (e) {
+      submit.setAttribute('aria-disabled', 'false');
+      submit.setAttribute('aria-busy', 'false');
+      submit.textContent = 'Send';
+      alertBox.textContent =
+        'Something went wrong sending that. Try again in a moment.';
+      alertBox.hidden = false;
+    }
+  });
+})();

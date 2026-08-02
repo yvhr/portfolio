@@ -675,6 +675,79 @@
                   >Night Owl Software Studios</a
                 >. Everything on this page is work I take on personally.
               </p>
+              <form
+                class="contact-form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                data-contact-form
+                novalidate
+              >
+                <!-- Netlify injects form-name on native posts; this form is
+                     submitted with fetch, so FormData has to carry it. -->
+                <input type="hidden" name="form-name" value="contact" />
+                <p hidden>
+                  <label
+                    >Don't fill this out:
+                    <input name="bot-field" tabindex="-1" autocomplete="off"
+                  /></label>
+                </p>
+
+                <p class="form-alert" data-form-alert role="alert" hidden></p>
+
+                <div class="field">
+                  <label class="mono field-label" for="f-name">Name</label>
+                  <input
+                    id="f-name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    aria-describedby="err-name"
+                  />
+                  <span class="field-error" id="err-name" hidden></span>
+                </div>
+
+                <div class="field">
+                  <label class="mono field-label" for="f-email">Email</label>
+                  <input
+                    id="f-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    aria-describedby="err-email"
+                  />
+                  <span class="field-error" id="err-email" hidden></span>
+                </div>
+
+                <div class="field">
+                  <label class="mono field-label" for="f-message"
+                    >What are you building?</label
+                  >
+                  <textarea
+                    id="f-message"
+                    name="message"
+                    rows="5"
+                    placeholder="A rough sketch is fine."
+                    aria-describedby="err-message"
+                  ></textarea>
+                  <span class="field-error" id="err-message" hidden></span>
+                </div>
+
+                <button class="submit" type="submit" data-submit>Send</button>
+              </form>
+
+              <div
+                class="form-sent"
+                data-contact-sent
+                role="status"
+                tabindex="-1"
+                hidden
+              >
+                <p class="mono form-sent-label">Message sent</p>
+                <p>Thanks — I'll reply within a couple of days.</p>
+              </div>
+
               <div class="contact-links mono">
                 <!-- CONTACT_LINKS -->
               </div>

@@ -810,3 +810,106 @@ button:focus-visible {
 .colophon a:hover {
   color: var(--ink);
 }
+
+/* --------------------------------------------------------------------------
+   §06 Contact form
+
+   Ruled, not boxed — inputs sit on a baseline the way the rest of the page
+   sits on hairlines, rather than arriving as a card from a different design.
+   -------------------------------------------------------------------------- */
+
+.contact-form {
+  margin: 40px 0 0;
+  max-width: 480px;
+}
+
+.field {
+  margin-bottom: 28px;
+}
+
+.field-label {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 6px 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.field textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.field input[aria-invalid='true'],
+.field textarea[aria-invalid='true'] {
+  border-bottom-color: var(--accent);
+}
+
+.field-error,
+.form-alert {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.submit {
+  appearance: none;
+  background: none;
+  border: 1px solid var(--rule);
+  padding: 10px 22px;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.submit:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.submit[aria-disabled='true'] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.form-sent {
+  margin: 40px 0 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--accent);
+}
+
+.form-sent-label {
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.contact-links {
+  margin-top: 40px;
+}
