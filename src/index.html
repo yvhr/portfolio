@@ -131,14 +131,17 @@
           <span class="pmark" aria-hidden="true"></span>
           <span> Manila · <span id="clock">--:--</span> </span>
         </div>
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-live="polite"
-        >
-          <span id="themeLabel">Day edition</span>
-        </button>
+        <div class="masthead-right">
+          <a class="masthead-link" href="/writing/">Writing</a>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-live="polite"
+          >
+            <span id="themeLabel">Day edition</span>
+          </button>
+        </div>
       </header>
 
       <main>
@@ -419,6 +422,25 @@
             </div>
           </div>
         </section>
+
+        <!-- Writing — the whole section is removed at build time when
+             nothing is published, rather than shipping an empty heading. -->
+        <!-- WRITING_SECTION_START -->
+        <section class="section" aria-labelledby="writing-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">§</div>
+              <div class="mono kicker">Writing</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="writing-title">Writing</h2>
+              <!-- Injected at build time from src/writing/*.md. The whole
+                   section collapses when nothing is published. -->
+              <!-- WRITING_POSTS -->
+            </div>
+          </div>
+        </section>
+        <!-- WRITING_SECTION_END -->
 
         <!-- 05 Background -->
         <section class="section" aria-labelledby="background-title">

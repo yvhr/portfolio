@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { writingPlugin } from './writing.js';
 
 const contactLinks = [
   { label: 'Email', href: 'mailto:josephharveyangeles@gmail.com' },
@@ -51,7 +52,7 @@ export default defineConfig({
     reportCompressedSize: true,
     chunkSizeWarningLimit: 500,
   },
-  plugins: [htmlInjectPlugin(contactLinks)],
+  plugins: [htmlInjectPlugin(contactLinks), writingPlugin()],
   server: {
     open: true,
   },
