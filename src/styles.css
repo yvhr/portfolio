@@ -123,7 +123,7 @@ body {
   );
   color: var(--ink);
   font-family: var(--serif);
-  font-size: clamp(18px, 1.5vw, 20px);
+  font-size: clamp(19px, 1.5vw, 20px);
   font-weight: 400;
   line-height: 1.65;
   transition:
@@ -586,8 +586,53 @@ button:focus-visible {
     --page-x: 24px;
   }
 
-  body {
+  /* The fluid clamps bottom out well before this width, so the whole scale
+     lands on its minimum at once and the page reads small on a phone. Set the
+     narrow-viewport sizes explicitly instead of letting the floor decide. */
+  .name {
+    font-size: 40px;
+  }
+
+  .thesis {
+    font-size: 28px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .entry-title {
+    font-size: 21px;
+  }
+
+  .numeral {
+    font-size: 34px;
+  }
+
+  .mono {
+    font-size: 13px;
+  }
+
+  .masthead,
+  .theme-toggle {
+    font-size: 12px;
+  }
+
+  .note {
+    font-size: 15px;
+  }
+
+  .oss-intro,
+  .oss-list li,
+  .currently-body,
+  .clients {
     font-size: 18px;
+  }
+
+  .closing,
+  .speaking,
+  .timeline dd {
+    font-size: 19px;
   }
 
   .hero {
