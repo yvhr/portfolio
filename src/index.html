@@ -558,7 +558,11 @@
                   >
                   — Receipt validation for App Store and Google Play purchases.
                   Apple JWS chain verification against pinned roots, encrypted
-                  per-tenant credentials. MIT.
+                  per-tenant credentials. MIT. It exists because an appeal
+                  failed: a hardware-linked app argued its purchases sat outside
+                  in-app purchase, Apple disagreed, and the validation layer we
+                  then had to build seemed worth owning properly rather than
+                  renting.
                 </li>
                 <li>
                   <a
