@@ -223,7 +223,7 @@
               <div class="gutter">
                 <div class="entry-num" aria-hidden="true">i</div>
                 <div class="mono entry-label">
-                  Connected hardware<br />Firmware · Mobile · Desktop
+                  Connected hardware<br />Firmware · Protocol · Mobile · Desktop
                 </div>
                 <p class="note entry-note">
                   A bug could start in the UI and end in firmware.
@@ -232,13 +232,53 @@
               <div class="col">
                 <h3 class="entry-title">A connected hardware platform</h3>
                 <p>
-                  Five layers of one product: the embedded firmware, the
-                  wireless protocol it speaks, the codec library that decodes
-                  it, the cross-platform mobile app that drives it, and the
-                  desktop tool engineers use to inspect and flash devices in the
-                  field. When the protocol moved between two different wireless
-                  standards, that change had to land across all five layers in
-                  coordinated releases.
+                  A consumer device with a companion app. Over several years I
+                  owned the embedded firmware, the wireless protocol it speaks,
+                  the codec library that decodes it, the cross-platform app that
+                  drives it, and the desktop tool engineers use to inspect and
+                  flash units in the field.
+                </p>
+                <p>
+                  The decision that mattered came early and looked like extra
+                  work at the time. The original design sent character commands
+                  over the wire, composed wherever they happened to be needed. I
+                  replaced that with an actual protocol — a byte-level encoding
+                  with framing, a control byte carrying type and command, and a
+                  length-prefixed payload — and then wrote it down as a
+                  specification rather than leaving it implicit in whichever
+                  codebase happened to speak it last.
+                </p>
+                <p>
+                  That is the whole engagement in one choice. Because the
+                  protocol was a document and a codec library rather than a
+                  habit, the client can commission hardware from someone else
+                  and hand them the spec. New devices do not require a new app.
+                  And when the wireless transport later moved from Bluetooth
+                  Classic to BLE — because Classic needs Apple's accessory
+                  program on iOS and BLE does not — the codec needed no change
+                  at all. Three of the five layers moved. The one describing
+                  what the bytes <em>mean</em> sat still, because it had never
+                  been coupled to how they travelled.
+                </p>
+                <p>
+                  The rest was less elegant. The native audio player needed
+                  capabilities neither web view gave me, so I wrote a proper
+                  Capacitor plugin with iOS and Android implementations behind
+                  one interface rather than special-casing per platform in app
+                  code. A device-name field computed its length in UTF-16 code
+                  units while the payload was UTF-8, so accented names were
+                  silently truncated on the wire — and a 256-byte name wrapped
+                  to zero, which the protocol defines as
+                  <em>leave unchanged</em>, turning a rename into a convincing
+                  no-op. Auditing that turned up a use-after-free in the
+                  firmware's rename handler that had been there since the first
+                  commit.
+                </p>
+                <p>
+                  The one I remember is a test jig that would not talk to one
+                  particular USB bridge chip. It was a wiring fault, and it was
+                  fixed with a soldering iron rather than a commit — which is
+                  why there is no trace of it in the history at all.
                 </p>
               </div>
             </div>
@@ -258,18 +298,60 @@
               <div class="col">
                 <h3 class="entry-title">A multi-tenant compliance platform</h3>
                 <p>
-                  I designed and built this one end to end — three front ends
-                  over a single multi-tenant Java backend: the core compliance
-                  workspace where records and regulatory filings are managed, an
-                  internal control panel for administrators, and a self-service
-                  portal for the workforce it covers. Permissions, routing and
-                  configuration all vary per tenant. I also wrote the tooling
-                  that migrated a client off their legacy system: 1,280 records,
-                  idempotent re-runs, dry-run mode. Later work was hardening —
-                  API-token requests were failing silently across 22 endpoints,
-                  and a nullable join was quietly dropping records from
-                  compliance reports, the kind of defect that surfaces during an
-                  audit rather than before one.
+                  Three front ends over a single backend: the workspace where
+                  records and regulatory filings are managed, an internal
+                  control panel, and a self-service portal for the workforce it
+                  covers. I designed and built it.
+                </p>
+                <p>
+                  The design decision was to make tenants data rather than code.
+                  Every tenant carries its own configuration, and an
+                  administrator changes what a tenant sees from the control
+                  panel — which fields are visible, which are editable, which
+                  features exist at all — and it appears in that tenant's UI
+                  without a deploy. The alternative is branching on tenant
+                  identity, and the alternative is how multi-tenant systems
+                  become unmaintainable: every new client adds a conditional
+                  somewhere nobody can find later.
+                </p>
+                <p>
+                  The other hard part was authentication. Tenants arrived with
+                  whatever identity provider they already had — Okta, Azure,
+                  Keycloak — and we had our own token auth that everything
+                  internal depended on. Rather than pick one and force it, I
+                  extended the framework's auth layer so both could authenticate
+                  the same request pipeline. That meant reading the framework's
+                  source, not just its documentation, because the extension
+                  points I needed were not the ones the docs described.
+                </p>
+                <p>
+                  It cost me later, in the way that clever things do. API-token
+                  requests were failing silently across the platform: our audit
+                  log wrote the acting user's id into a column with a foreign
+                  key to the users table, and a token's principal is synthetic —
+                  it has no row there. Every token-authenticated write hit a
+                  constraint violation and surfaced as a generic 500. It was
+                  invisible for as long as it was because nobody using a browser
+                  ever took that path.
+                </p>
+                <p>
+                  The same investigation turned up something quieter. A
+                  reporting view joined each record to the user who created it —
+                  an inner join, which is correct until the creator is a token
+                  and the column is null. Null matches nothing, so those rows
+                  did not error; they simply were not there. The records
+                  existed. The report just did not mention them. That is the
+                  kind of defect that surfaces during an audit rather than
+                  before one, and it is the reason I left the critical paths
+                  behind 241 regression tests.
+                </p>
+                <p>
+                  I also wrote the tooling that moved a client off their legacy
+                  system — 1,280 records, with dry-run and re-runnable imports.
+                  Idempotency was genuinely awkward: the source had no natural
+                  key and I could not add one to the destination, so
+                  <em>already imported</em> had to be inferred from the shape of
+                  the record itself.
                 </p>
               </div>
             </div>
@@ -290,10 +372,41 @@
                 <h3 class="entry-title">A consumer social platform</h3>
                 <p>
                   A community app for a niche recreational audience: activity
-                  logging, location sharing, feeds and the social graph
-                  connecting them. I built the whole product — the Java backend
-                  and data model, the cross-platform mobile app, and the admin
-                  tooling — and carried it through two major versions.
+                  logging, feeds, and the social graph connecting them. I built
+                  the backend and data model, the cross-platform app, and the
+                  admin tooling, and carried it through two major versions.
+                </p>
+                <p>
+                  The first version had a persistence layer I wrote myself,
+                  mapping query results to objects by position. It worked until
+                  two adjacent fields in one model were declared in a different
+                  order than they were read, and a comment's parent id started
+                  coming back as its parent. Nothing threw. The data was simply
+                  wrong in a way no test was looking for. That bug is most of
+                  the argument for the second version, which deleted the
+                  hand-rolled framework entirely and moved onto a maintained one
+                  — the data model survived unchanged; only the machinery around
+                  it went.
+                </p>
+                <p>
+                  There is no follow table anywhere in the schema. Interest is
+                  derived: engage with a thread and you receive its
+                  notifications until you mute it. That was the right call for
+                  the product and it made the feed expensive — building a page
+                  meant fetching each post's author, attachments, likes and
+                  comment count separately, and the popularity sorts had to be
+                  pushed down into database functions to stay usable. I would
+                  describe that as moving the problem rather than solving it.
+                </p>
+                <p>
+                  Two smaller things I think about. I deleted roughly eight and
+                  a half thousand lines of JavaScript image-cropping code and
+                  used the operating system's own photo editor instead. And I
+                  once shipped a backend change that hid posts until their
+                  photos finished uploading, before the app that understood it
+                  had shipped — so I turned it off again and re-enabled it a
+                  release later. Coordinating two release trains is not a
+                  technical problem and it will still cost you a day.
                 </p>
               </div>
             </div>
@@ -313,13 +426,47 @@
               <div class="col">
                 <h3 class="entry-title">A high-value transaction platform</h3>
                 <p>
-                  Around twenty Java services communicating over an event bus,
-                  with signed inter-service requests and a four-stage release
-                  promotion pipeline. I was brought in for architecture
-                  documentation and targeted security work — a 61-page developer
-                  handbook with 68 architecture diagrams, plus fixes for
-                  unbounded request handling and a re-entrancy ordering bug in
-                  the transaction layer.
+                  Roughly twenty services over an event bus, with signed
+                  inter-service requests and a four-stage release promotion
+                  pipeline. I was brought in for architecture documentation and
+                  targeted security work — which is to say, brought in to
+                  understand a system nobody had written down.
+                </p>
+                <p>
+                  The documentation was the deliverable: a 61-page developer
+                  handbook with 68 architecture diagrams, each service page
+                  grounded in real file and line references so it could be
+                  checked rather than believed. Writing it is also how I found
+                  the interesting bug.
+                </p>
+                <p>
+                  Order payment had three routes — wallet balance, card, or a
+                  split across both — and each carried its own idempotency
+                  guard, checking the ledger for its own kind of entry before
+                  charging. Every guard was correct. The bus guarantees
+                  at-least-once delivery, so a payment event can arrive twice;
+                  the first delivery spends part of the wallet balance and
+                  writes a split-payment entry. The redelivery then re-enters
+                  the same code with a <em>different balance</em>, and the
+                  dispatcher routes it down the card-only branch instead. That
+                  branch looks for a card-only entry, does not find one, and
+                  concludes this is a fresh payment.
+                </p>
+                <p>
+                  It charges the card again. Not a race — a routing decision
+                  that silently changes on re-entry because shared state has
+                  already moved. It was hard to see precisely because each path
+                  was right in isolation; the defect lived in the seam between
+                  them, and no test that exercised one path could find it. The
+                  fix was to make every path recognise every path's entries.
+                </p>
+                <p>
+                  The rest was hardening: an internal money-moving endpoint that
+                  sat behind a path prefix the rate limiter exempted, and
+                  request handling that would read an upstream response of any
+                  size into memory. Both are the same lesson in different
+                  clothes — the dangerous code is the code nobody thought was on
+                  the boundary.
                 </p>
               </div>
             </div>
@@ -341,11 +488,36 @@
                   A recovery and mental health platform
                 </h3>
                 <p>
-                  Program content, progress tracking, and a moderated community
-                  where members post and support one another. The engineering
-                  interest here was less in the features than in the
-                  responsibility — keeping a social product safe and private for
-                  a genuinely vulnerable user base.
+                  Program content, progress tracking, and a community where
+                  members post and support one another. The feature list was not
+                  the difficult part.
+                </p>
+                <p>
+                  Two decisions still look right to me. There is no display-name
+                  field in the schema at all — names shown in the community are
+                  derived, never stored, because a peer-support product should
+                  not accumulate an identity it does not need. And counsellors
+                  can only see the members assigned to them. That one is a
+                  constraint on staff rather than on users, and it exists so
+                  that assessment answers do not become browsable by anyone with
+                  a clinical login.
+                </p>
+                <p>
+                  The mistake I remember was in bulk import. A change to how
+                  members were matched to their counsellor and group called the
+                  wrong lookup for one of the two, so people could be assigned
+                  to the wrong group quietly and correctly-looking. On most
+                  products that is a data bug. Here it is a care-routing failure
+                  — the wrong person receives someone's progress. We reverted it
+                  the same day rather than patching forward, and re-implemented
+                  it properly a few hours later.
+                </p>
+                <p>
+                  I would not describe the moderation model as finished.
+                  Anything above a member role can remove a post, which is a
+                  blunt instrument, and I have thought since about what a real
+                  review queue would have looked like on a platform where the
+                  cost of leaving something up is not measured in complaints.
                 </p>
               </div>
             </div>
