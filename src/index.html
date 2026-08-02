@@ -1,282 +1,489 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joseph Harvey Angeles - Software Engineer</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Joseph Harvey Angeles — Software Engineer &amp; Systems Architect
+    </title>
 
-    <!-- Basic SEO Meta Tags -->
-    <meta name="description" content="Joseph Harvey Angeles - Full-stack engineer and technical leader with 10+ years of experience. Founder of Night Owl Studios, specializing in bespoke software solutions across mobile, web, and desktop platforms.">
-    <meta name="keywords" content="Joseph Harvey Angeles, Yev, Software Engineer, Full-stack Developer, Vue.js, TypeScript, Java, Night Owl Studios, Technical Leader, Mobile Development, Web Development, Quasar, Philippines">
-    <meta name="author" content="Joseph Harvey Angeles">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://josephharveyangeles.com">
+    <!-- Resolve the theme before first paint so there is no flash. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
 
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Joseph Harvey Angeles - Software Engineer">
-    <meta property="og:description" content="Full-stack engineer and technical leader with 10+ years of experience. Founder of Night Owl Studios, specializing in bespoke software solutions across mobile, web, and desktop platforms.">
-    <meta property="og:url" content="https://josephharveyangeles.com">
-    <meta property="og:site_name" content="Joseph Harvey Angeles">
-    <meta property="og:image" content="https://josephharveyangeles.com/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Joseph Harvey Angeles - Software Engineer Portfolio">
-    <meta property="og:locale" content="en_US">
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Full-stack engineer and technical leader in Manila. I design and build software across mobile, web, desktop and firmware — for clients who need the whole thing, not a slice of it."
+    />
+    <meta name="author" content="Joseph Harvey Angeles" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://josephharveyangeles.com" />
 
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Joseph Harvey Angeles - Software Engineer">
-    <meta name="twitter:description" content="Full-stack engineer and technical leader with 10+ years of experience. Founder of Night Owl Studios, specializing in bespoke software solutions.">
-    <meta name="twitter:image" content="https://josephharveyangeles.com/og-image.png">
-    <meta name="twitter:image:alt" content="Joseph Harvey Angeles - Software Engineer Portfolio">
-    <meta name="twitter:site" content="@yev">
-    <meta name="twitter:creator" content="@yev">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Joseph Harvey Angeles — Software Engineer &amp; Systems Architect"
+    />
+    <meta
+      property="og:description"
+      content="I build systems that outlast the problems they solved. Full-stack engineer and technical leader in Manila."
+    />
+    <meta property="og:url" content="https://josephharveyangeles.com" />
+    <meta property="og:site_name" content="Joseph Harvey Angeles" />
+    <meta
+      property="og:image"
+      content="https://josephharveyangeles.com/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Joseph Harvey Angeles — I build systems that outlast the problems they solved."
+    />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Additional SEO Meta Tags -->
-    <meta name="theme-color" content="#f4f1ea">
-    <meta name="msapplication-TileColor" content="#f4f1ea">
-    <meta name="application-name" content="Joseph Harvey Angeles">
-    <meta name="apple-mobile-web-app-title" content="Joseph Harvey Angeles">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="geo.region" content="PH">
-    <meta name="geo.placename" content="Manila, Philippines">
-    <meta name="geo.position" content="14.5995;120.9842">
-    <meta name="ICBM" content="14.5995, 120.9842">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Joseph Harvey Angeles — Software Engineer &amp; Systems Architect"
+    />
+    <meta
+      name="twitter:description"
+      content="I build systems that outlast the problems they solved. Full-stack engineer and technical leader in Manila."
+    />
+    <meta
+      name="twitter:image"
+      content="https://josephharveyangeles.com/og-image.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Joseph Harvey Angeles — I build systems that outlast the problems they solved."
+    />
+    <meta name="twitter:site" content="@yev" />
+    <meta name="twitter:creator" content="@yev" />
+
+    <!-- Chrome -->
+    <meta
+      name="theme-color"
+      content="#1c1a17"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f4f1ea"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta name="application-name" content="Joseph Harvey Angeles" />
+    <meta name="apple-mobile-web-app-title" content="Joseph Harvey Angeles" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="geo.region" content="PH" />
+    <meta name="geo.placename" content="Manila, Philippines" />
+    <meta name="geo.position" content="14.5995;120.9842" />
+    <meta name="ICBM" content="14.5995, 120.9842" />
 
     <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="/favicon.ico"
-    >
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon-32x32.png"
-    >
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon-16x16.png"
-    >
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/apple-touch-icon.png"
-    >
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Resource Preloading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    >
+    <!-- Self-hosted fonts. No third-party requests anywhere on this page. -->
     <link
       rel="preload"
-      href="https://fonts.gstatic.com/s/jetbrainsmono/v18/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2"
+      href="/fonts/newsreader-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
-    >
-    <link rel="dns-prefetch" href="https://api.dicebear.com">
-    <link rel="dns-prefetch" href="https://www.youtube.com">
-    <link rel="dns-prefetch" href="https://nossdev.com">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="stylesheet" href="./styles.css" />
   </head>
+
   <body>
-    <div class="container">
-      <header>
-        <div class="header-content">
-          <a href="/" class="site-title">
-            <span class="prompt-user">yev</span>
-            <span class="prompt-at">@</span>
-            <span class="prompt-host">localhost</span>
-            <span class="prompt-symbol">:</span>
-            <span class="prompt-path">~</span>
-            <span class="prompt-symbol">$</span>
-          </a>
-          <nav>
-            <a href="#about">about</a>
-            <a href="#work">work</a>
-            <a href="#contact">contact</a>
-            <a
-              href="https://medium.com/@yhev"
-              target="_blank"
-              rel="noreferrer"
-            >blog</a
-            >
-            <button
-              class="theme-toggle"
-              id="themeToggle"
-              aria-label="Toggle theme"
-            >
-              <span id="themeIcon">[dark]</span>
-            </button>
-          </nav>
+    <div class="wrap">
+      <!-- Running head -->
+      <header class="masthead mono">
+        <div class="masthead-left">
+          <span class="pmark" aria-hidden="true"></span>
+          <span> Manila · <span id="clock">--:--</span> </span>
         </div>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-live="polite"
+        >
+          <span id="themeLabel">Day edition</span>
+        </button>
       </header>
 
       <main>
-        <section class="intro">
-          <img
-            src="https://api.dicebear.com/9.x/shapes/svg?seed=yev"
-            alt="avatar"
-            loading="lazy"
-            decoding="async"
-          >
-          <div class="whoami-header">
-            <span class="terminal-prompt">$</span> whoami
-          </div>
-          <h1>Joseph Harvey Angeles</h1>
-          <div class="contact-links">
-            <!-- CONTACT_LINKS -->
-          </div>
-          <p class="tagline text-comment">Salute plurimam dicit</p>
-          <p>
-            Full-stack engineer and technical leader with 10+ years of
-            experience delivering bespoke software across mobile, web, and
-            desktop platforms. Founder of
-            <a
-              href="https://nossdev.com"
-              target="_blank"
-              rel="noreferrer"
-            >Night Owl Studios</a
-            >, a product-focused agency specializing in cross-platform
-            applications, from hardware-integrated mobile apps to scalable
-            enterprise systems. I've led agile teams, designed communication
-            protocols, built CI/CD pipelines, and worked directly with clients
-            across industries.
-          </p>
-          <p>
-            I focus on delivering solutions that make sense — practical,
-            scalable, and aligned with long-term success. Sometimes that means
-            architecting systems from the ground up; other times, it’s
-            recommending simpler tools so clients can focus resources where they
-            matter most.
-          </p>
-          <div class="tech-stack">
-            <code>Quasar</code>
-            <code>Vue.js</code>
-            <code>TypeScript</code>
-            <code>Capacitor</code>
-            <code>Java</code>
-            <code>Vert.x</code>
-            <code>Dropwizard</code>
-            <code>PostgreSQL</code>
-            <code>etc..</code>
+        <!-- Hero -->
+        <section class="hero">
+          <h1 class="name">Joseph Harvey Angeles</h1>
+          <div class="accent-rule" aria-hidden="true"></div>
+          <div class="row">
+            <div class="gutter mono hero-meta">
+              <div>Manila</div>
+              <div>10+ years</div>
+              <div>Systems &amp; architecture</div>
+              <div>Mostly after 22:00</div>
+            </div>
+            <div class="col">
+              <p class="thesis">
+                I build systems that outlast the problems they solved.
+              </p>
+              <p>
+                Full-stack engineer and technical leader. I design and build
+                software across mobile, web, desktop and firmware — and I've
+                spent the last decade doing it for clients who needed the whole
+                thing, not a slice of it. I run Night Owl Software Studios, a
+                small studio in Manila.
+              </p>
+              <div class="currently">
+                <div class="mono currently-label">Currently</div>
+                <p class="currently-body">
+                  Taking two projects for 2026 · reading about protocol design ·
+                  still convinced most software should be smaller.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section id="about">
-          <h2>Ethos</h2>
-          <p>
-            I believe the best systems are those that balance elegance with
-            practicality. Code should be maintainable, scalable, and aligned
-            with long-term goals — not just quick fixes for the present. My
-            approach emphasizes clarity, simplicity, and architectural
-            foresight, ensuring solutions remain valuable and adaptable over
-            time.
-          </p>
-          <p class="text-comment text-small">
-            "Simplicity is the ultimate sophistication" - Leonardo da Vinci
-          </p>
-        </section>
-        <section id="speaking">
-          <h2>Speaking</h2>
-          <p>
-            I had the opportunity to speak at the very first Quasar Conference,
-            where I presented techniques and best practices for
-            <a
-              href="https://www.youtube.com/watch?v=6ZKBZ3k4Ebk&amp;t=1438"
-              target="_blank"
-              rel="noreferrer"
-            >building multi-platform applications</a
-            >. You can watch the full recording below — I'm the first speaker in
-            the session.
-          </p>
-          <div class="video-container">
-            <iframe
-              src="https://www.youtube.com/embed/6ZKBZ3k4Ebk?start=1438"
-              title="Quasar Conference - Building Multi-Platform Applications"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+        <!-- 02 How I work -->
+        <section class="section" aria-labelledby="approach-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">02</div>
+              <div class="mono kicker">Approach</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="approach-title">How I work</h2>
+              <p class="dropcap">
+                The best systems balance elegance with practicality. Code should
+                be maintainable and aligned with where a business is going, not
+                just patched for where it is. Often the most valuable thing I do
+                is talk a client out of building something.
+              </p>
+              <p>
+                I work with AI agents the way I'd work with a team — they draft,
+                I set the constraints, and nothing ships without review. In
+                practice that's meant an unusual amount of adversarial review: a
+                second pass whose job is to break what the first one wrote. The
+                leverage is real. The judgment is still the job.
+              </p>
+              <figure class="pullquote">
+                <p>&ldquo;Simplicity is the ultimate sophistication&rdquo;</p>
+                <figcaption class="mono">Leonardo da Vinci</figcaption>
+              </figure>
+            </div>
           </div>
         </section>
 
-        <section id="work">
-          <h2>Career Highlights</h2>
-          <ul>
-            <li>
-              <span class="text-primary">Night Owl Studios</span> — Built and
-              delivered bespoke software solutions across industries. Led
-              architecture, development, and client consulting. Key projects
-              include:
-            </li>
-            <ul class="text-small">
-              <li>
-                <span class="text-primary">LJK Inc.</span> — Led development of
-                multi-tenant enterprise systems (driver compliance, escrow, and
-                mental health recovery apps), while mentoring and managing
-                developers.
-              </li>
-              <li>
-                <span class="text-primary">Ashnu Technologies</span> —
-                Architected and developed the Infopathy mobile app, designed a
-                custom Bluetooth communication protocol, and collaborated
-                directly with firmware teams.
-              </li>
-              <li>
-                <span class="text-primary">Other Clients</span> — Delivered
-                solutions for fitness platforms (DLDNation), trademark
-                protection (DigitalCandy), and real estate tools (REWW), among
-                others.
-              </li>
-            </ul>
-            <li>
-              <span class="text-primary">Accenture</span> — Delivered
-              large-scale business directory platforms using Agile and CI/CD
-              practices, with direct on-site client collaboration.
-            </li>
-            <li>
-              <span class="text-primary">Nokia Networks</span> — Developed core
-              software tools and UIs supporting cellular infrastructure and
-              early 5G systems.
-            </li>
-          </ul>
+        <!-- 03 Selected work -->
+        <section class="section" aria-labelledby="work-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">03</div>
+              <div class="mono kicker">Five engagements</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="work-title">Selected work</h2>
+            </div>
+          </div>
+
+          <article class="entry">
+            <div class="row">
+              <div class="gutter">
+                <div class="entry-num" aria-hidden="true">i</div>
+                <div class="mono entry-label">
+                  Connected hardware<br />Firmware · Mobile · Desktop
+                </div>
+                <p class="note entry-note">
+                  Six weeks to move the protocol. Nothing shipped out of step.
+                </p>
+              </div>
+              <div class="col">
+                <h3 class="entry-title">A connected hardware platform</h3>
+                <p>
+                  Five layers of one product: the embedded firmware, the
+                  wireless protocol it speaks, the codec library that decodes
+                  it, the cross-platform mobile app that drives it, and the
+                  desktop tool engineers use to inspect and flash devices in the
+                  field. When the protocol moved between two different wireless
+                  standards, that change had to land across all five layers in
+                  coordinated releases.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="row">
+              <div class="gutter">
+                <div class="entry-num" aria-hidden="true">ii</div>
+                <div class="mono entry-label">
+                  Regulated compliance<br />Multi-tenant platform
+                </div>
+                <p class="note entry-note">
+                  Three front ends, one tenant model.
+                </p>
+              </div>
+              <div class="col">
+                <h3 class="entry-title">A multi-tenant compliance platform</h3>
+                <p>
+                  I designed and built this one end to end — three front ends
+                  over a single multi-tenant Java backend: the core compliance
+                  workspace where records and regulatory filings are managed, an
+                  internal control panel for administrators, and a self-service
+                  portal for the workforce it covers. Permissions, routing and
+                  configuration all vary per tenant. I also wrote the tooling
+                  that migrated a client off their legacy system: 1,280 records,
+                  idempotent re-runs, dry-run mode. Later work was hardening —
+                  API-token requests were failing silently across 22 endpoints,
+                  and a nullable join was quietly dropping records from
+                  compliance reports, the kind of defect that surfaces during an
+                  audit rather than before one.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="row">
+              <div class="gutter">
+                <div class="entry-num" aria-hidden="true">iii</div>
+                <div class="mono entry-label">
+                  Consumer social<br />iOS · Android · Web
+                </div>
+                <p class="note entry-note">
+                  Two major versions, one pair of hands.
+                </p>
+              </div>
+              <div class="col">
+                <h3 class="entry-title">A consumer social platform</h3>
+                <p>
+                  A community app for a niche recreational audience: activity
+                  logging, location sharing, feeds and the social graph
+                  connecting them. I built the whole product — the Java backend
+                  and data model, the cross-platform mobile app, and the admin
+                  tooling — and carried it through two major versions.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="row">
+              <div class="gutter">
+                <div class="entry-num" aria-hidden="true">iv</div>
+                <div class="mono entry-label">
+                  Financial infrastructure<br />Distributed backend
+                </div>
+                <p class="note entry-note">
+                  Sixty-eight diagrams. Someone had to draw them.
+                </p>
+              </div>
+              <div class="col">
+                <h3 class="entry-title">A high-value transaction platform</h3>
+                <p>
+                  Around twenty Java services communicating over an event bus,
+                  with signed inter-service requests and a four-stage release
+                  promotion pipeline. I was brought in for architecture
+                  documentation and targeted security work — a 61-page developer
+                  handbook with 68 architecture diagrams, plus fixes for
+                  unbounded request handling and a re-entrancy ordering bug in
+                  the transaction layer.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry">
+            <div class="row">
+              <div class="gutter">
+                <div class="entry-num" aria-hidden="true">v</div>
+                <div class="mono entry-label">
+                  Healthcare<br />Mobile · Community
+                </div>
+                <p class="note entry-note">
+                  Here the hard part was care, not features.
+                </p>
+              </div>
+              <div class="col">
+                <h3 class="entry-title">
+                  A recovery and mental health platform
+                </h3>
+                <p>
+                  Programme content, progress tracking, and a moderated
+                  community where members post and support one another. The
+                  engineering interest here was less in the features than in the
+                  responsibility — keeping a social product safe and private for
+                  a genuinely vulnerable user base.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <div class="row">
+            <div class="gutter" aria-hidden="true"></div>
+            <div class="col">
+              <p class="closing muted">
+                Client names withheld. Most of my work is under NDA, which tends
+                to come with the kind of engagement where you're handed the
+                whole system rather than a ticket.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>
-            I take on select projects where I can bring real value through
-            architecture, development, and end-to-end delivery. If you’re
-            looking for someone who can turn complex ideas into working
-            products, you can reach me here:
-            <a href="mailto:josephharveyangeles@gmail.com">josephharveyangeles@gmail.com</a
-            >
-          </p>
+        <!-- 04 Open source -->
+        <section class="section" aria-labelledby="oss-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">04</div>
+              <div class="mono kicker">Public code</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="oss-title">Open source</h2>
+              <p class="oss-intro muted">
+                Side projects. The code is public, so if you want to see how I
+                actually write, start here.
+              </p>
+              <ul class="oss-list">
+                <li>
+                  <a href="https://attesto.dev" target="_blank" rel="noreferrer"
+                    >Attesto</a
+                  >
+                  — Receipt validation for App Store and Google Play purchases.
+                  Apple JWS chain verification against pinned roots, encrypted
+                  per-tenant credentials. MIT.
+                </li>
+                <li>
+                  <a href="https://babelon.dev" target="_blank" rel="noreferrer"
+                    >Babelon</a
+                  >
+                  — AI-assisted localisation that preserves ICU plurals and
+                  placeholders. Rust CLI for CI pipelines.
+                </li>
+                <li>
+                  <a
+                    href="https://www.npmjs.com/package/@nosslabs/iap"
+                    target="_blank"
+                    rel="noreferrer"
+                    >@nosslabs/iap</a
+                  >
+                  — In-app purchases for Capacitor. 282 tests, 96% coverage;
+                  fixes upstreamed into the native plugin it builds on.
+                </li>
+                <li>
+                  <a
+                    href="https://www.npmjs.com/package/@nosslabs/bluetooth-classic"
+                    target="_blank"
+                    rel="noreferrer"
+                    >@nosslabs/bluetooth-classic</a
+                  >
+                  — Bluetooth Classic for hybrid apps, native on Android and iOS
+                  behind one TypeScript contract.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 Background -->
+        <section class="section" aria-labelledby="background-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">05</div>
+              <div class="mono kicker">Where I've been</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="background-title">Background</h2>
+              <dl class="timeline">
+                <dt class="mono">2020 — now</dt>
+                <dd>
+                  Night Owl Software Studios — Founder &amp; Lead Engineer
+                </dd>
+                <dt class="mono">2018 — 2020</dt>
+                <dd>Freelance Full-Stack Engineer</dd>
+                <dt class="mono">2017 — 2018</dt>
+                <dd>Accenture — Application Developer, Team Lead</dd>
+                <dt class="mono">2014 — 2017</dt>
+                <dd>
+                  Nokia Networks — Software Specialist / R&amp;D Engineer 3
+                </dd>
+              </dl>
+              <p class="clients muted">
+                Clients across the studio and freelance years include Ashnu
+                Technologies, DigitalCandy, DLDNation, LJK Inc. and REWW.
+              </p>
+              <p class="speaking">
+                Speaker,
+                <a
+                  href="https://www.youtube.com/watch?v=6ZKBZ3k4Ebk&amp;t=1438"
+                  target="_blank"
+                  rel="noreferrer"
+                  >Quasar Conference 2020</a
+                >
+                — building multi-platform applications.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 Contact -->
+        <section class="section" aria-labelledby="contact-title">
+          <div class="row">
+            <div class="gutter">
+              <div class="numeral" aria-hidden="true">06</div>
+              <div class="mono kicker">Say hello</div>
+            </div>
+            <div class="col">
+              <h2 class="section-title" id="contact-title">Contact</h2>
+              <p>
+                I take on a small number of projects a year where I can own the
+                outcome end to end. If you have something you'd like built
+                properly, I'd like to hear about it.
+              </p>
+              <div class="contact-links mono">
+                <!-- CONTACT_LINKS -->
+              </div>
+            </div>
+          </div>
         </section>
       </main>
 
-      <footer>
-        <div class="footer-content">
-          <div class="copyright">
-            EOF &copy; <span id="currentYear"></span>
-          </div>
-          <div class="build-info">
-            Last-Modified:
-            <!-- BUILD_DATE -->
-          </div>
-        </div>
+      <footer class="site-footer">
+        <span class="monogram">JHA</span>
+        <span class="mono muted">
+          <!-- BUILD_YEAR -->
+        </span>
       </footer>
     </div>
 

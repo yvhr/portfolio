@@ -15,7 +15,17 @@ module.exports = {
         'plugin:@html-eslint/recommended',
       ],
       rules: {
-        '@html-eslint/indent': ['error', 2],
+        // Prettier owns HTML formatting; ESLint owns correctness and a11y.
+        // These five rules disagree with Prettier's output (it self-closes void
+        // elements and keeps short inline spans on one line), so leaving them on
+        // makes `lint` and `format:check` mutually unsatisfiable — which is why
+        // this repo could never have both green at once.
+        '@html-eslint/indent': 'off',
+        '@html-eslint/require-closing-tags': 'off',
+        '@html-eslint/no-extra-spacing-attrs': 'off',
+        '@html-eslint/attrs-newline': 'off',
+        '@html-eslint/element-newline': 'off',
+
         '@html-eslint/require-doctype': 'error',
         '@html-eslint/require-lang': 'error',
         '@html-eslint/require-meta-charset': 'error',

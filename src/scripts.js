@@ -1,46 +1,74 @@
-// Theme toggle functionality
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-const html = document.documentElement;
+/**
+ * josephharveyangeles.com — v8
+ *
+ * Two pieces of state and nothing else: the theme, and a Manila clock.
+ * The theme is already resolved by the inline script in <head> before first
+ * paint; this only wires the toggle and keeps the label in sync.
+ *
+ * Loaded by both index.html and vertex.html, so every lookup is guarded —
+ * a change to one page must not throw on the other.
+ */
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const root = document.documentElement;
 
-if (savedTheme) {
-  html.setAttribute('data-theme', savedTheme);
-  updateIcon(savedTheme);
-} else if (prefersDark) {
-  html.setAttribute('data-theme', 'dark');
-  updateIcon('dark');
-} else {
-  html.setAttribute('data-theme', 'dark');
-  updateIcon('dark');
+/* -------------------------------------------------------------------------
+   Theme
+   ------------------------------------------------------------------------- */
+
+const toggle = document.getElementById('themeToggle');
+const label = document.getElementById('themeLabel');
+
+/** The toggle names the edition you would switch *to*, not the current one. */
+function labelFor(theme) {
+  return theme === 'dark' ? 'Day edition' : 'Night edition';
 }
 
-function updateIcon(theme) {
-  themeIcon.textContent = theme === 'dark' ? '[light]' : '[dark]';
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  if (label) label.textContent = labelFor(theme);
+  if (toggle) {
+    toggle.setAttribute(
+      'aria-label',
+      `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`
+    );
+  }
 }
 
-themeToggle.addEventListener('click', () => {
-  const currentTheme = html.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+applyTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
 
-  html.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateIcon(newTheme);
-});
-
-// Set current year
-document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch (e) {
+      /* Private mode or storage disabled — the toggle still works this session. */
     }
   });
-});
+}
+
+/* -------------------------------------------------------------------------
+   Clock
+
+   Always Manila, regardless of where the reader is. A half-minute refresh is
+   plenty for a display that only shows hours and minutes.
+   ------------------------------------------------------------------------- */
+
+const clock = document.getElementById('clock');
+
+if (clock) {
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Asia/Manila',
+  });
+
+  const tick = () => {
+    clock.textContent = formatter.format(new Date());
+  };
+
+  tick();
+  setInterval(tick, 30000);
+}

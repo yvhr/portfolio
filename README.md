@@ -4,6 +4,11 @@
 
 ## Change History
 
+- 8/2/2026
+  - version 8: Editorial paper-ground redesign. Newsreader serif prose on a warm
+    paper ground, monospace confined to a left gutter, hairline rules instead of
+    cards. Dark by default. Self-hosted fonts — no third-party requests on the
+    front page.
 - 8/19/2025
   - version 7: Another redesign. Simplified. Minimalist.
 - 7/17/2020
