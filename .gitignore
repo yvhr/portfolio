@@ -20,3 +20,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# Design handoff bundles (tool artifacts, not source)
+*.zip

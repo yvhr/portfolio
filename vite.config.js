@@ -1,14 +1,19 @@
 import { defineConfig } from 'vite';
 
 const contactLinks = [
-  { label: 'mail', href: 'mailto:josephharveyangeles@gmail.com' },
-  { label: 'github', href: 'https://github.com/yvhr' },
-  { label: 'linkedin', href: 'https://linkedin.com/in/josephharveyangeles' },
-  { label: 'x', href: 'https://x.com/yev' },
+  { label: 'Email', href: 'mailto:josephharveyangeles@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/yvhr' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/josephharveyangeles' },
+  { label: 'X', href: 'https://x.com/yev' },
 ];
 
+/**
+ * Fills the placeholders left in the HTML: the contact row, and the footer
+ * year. Both are resolved at build time so neither depends on JavaScript
+ * running in the browser.
+ */
 function htmlInjectPlugin(links) {
-  const buildDate = new Date().toISOString().split('T')[0];
+  const buildYear = String(new Date().getFullYear());
   return {
     name: 'html-inject',
     transformIndexHtml(html) {
@@ -23,7 +28,7 @@ function htmlInjectPlugin(links) {
         .join('\n            ');
       return html
         .replace('<!-- CONTACT_LINKS -->', anchors)
-        .replace('<!-- BUILD_DATE -->', buildDate);
+        .replaceAll('<!-- BUILD_YEAR -->', buildYear);
     },
   };
 }
@@ -37,6 +42,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'src/index.html',
+        // The easter egg. Keep this input — /vertex is served from it.
         vertex: 'src/vertex.html',
       },
     },
