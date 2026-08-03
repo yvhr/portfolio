@@ -1,5 +1,5 @@
 ---
-title: I appealed to Apple with an analogy. Analogies don't work on lists.
+title: "I appealed to Apple with an analogy. Analogies don't work on lists."
 date: 2026-08-03
 description: >-
   We argued our app was basically a reader app for a physical product. Apple
