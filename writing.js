@@ -27,6 +27,12 @@ const marked = new Marked({
   gfm: true,
   breaks: false,
   renderer: {
+    // Images arrive from eight-year-old posts; some are 2MB reaction GIFs.
+    // Lazy + async decode so a post with eleven of them doesn't block paint.
+    image({ href, title, text }) {
+      const t = title ? ` title="${title}"` : '';
+      return `<img src="${href}" alt="${text || ''}"${t} loading="lazy" decoding="async">`;
+    },
     code({ text, lang }) {
       const language = lang && hljs.getLanguage(lang) ? lang : null;
       const html = language
