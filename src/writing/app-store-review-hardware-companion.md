@@ -47,10 +47,16 @@ Here's the part I understand now and didn't then.
 
 **3.1.3(a) isn't a principle. It's a list.**
 
-"Reader" apps aren't defined by the shape of the relationship between an app
-and a thing you already own. They're defined by category — magazines,
-newspapers, books, audio, music, video. That's it. You are either in one of
-those buckets or you are not in any of them.
+Here is the actual text, and the giveaway is one word:
+
+> Apps may allow a user to access previously purchased content or content
+> subscriptions (**specifically**: magazines, newspapers, books, audio, music,
+> and video).
+
+_Specifically._ Not "such as". Not "for example". "Reader" apps aren't defined
+by the shape of the relationship between an app and a thing you already own —
+they're defined by category, and the category list is closed. You are either in
+one of those six buckets or you are not in any of them.
 
 We weren't arguing that we were in a bucket. We were arguing that we were
 *like* something in a bucket. And you can't reason your way onto an enumerated
