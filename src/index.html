@@ -232,33 +232,38 @@
               <div class="col">
                 <h3 class="entry-title">A connected hardware platform</h3>
                 <p>
-                  A consumer device with a companion app. Over several years I
-                  owned the embedded firmware, the wireless protocol it speaks,
-                  the codec library that decodes it, the cross-platform app that
-                  drives it, and the desktop tool engineers use to inspect and
-                  flash units in the field.
+                  A consumer hardware line with a companion app. Over several
+                  years I owned the embedded firmware, the protocol it speaks,
+                  the codec library that encodes and decodes it, the
+                  cross-platform app that drives it, and the desktop tool
+                  engineers use to inspect and flash units in the field.
                 </p>
                 <p>
-                  The decision that mattered came early and looked like extra
-                  work at the time. The original design sent character commands
-                  over the wire, composed wherever they happened to be needed. I
-                  replaced that with an actual protocol — a byte-level encoding
+                  The earlier devices were passive — the app played audio and
+                  they did something physical with it. The newer one is active,
+                  closer to a media player with its own storage, and it needed
+                  to be talked to. A third-party vendor shipped its first
+                  firmware doing that by sending serialized JSON over Bluetooth
+                  Classic. It worked, and it was enormously wasteful.
+                </p>
+                <p>
+                  I argued for a real protocol instead: a byte-level encoding
                   with framing, a control byte carrying type and command, and a
-                  length-prefixed payload — and then wrote it down as a
-                  specification rather than leaving it implicit in whichever
-                  codebase happened to speak it last.
+                  length-prefixed payload — written down as a specification
+                  rather than left implicit in whichever codebase spoke it last.
+                  That was a harder sell than it sounds, because the thing it
+                  replaced already worked.
                 </p>
                 <p>
-                  That is the whole engagement in one choice. Because the
-                  protocol was a document and a codec library rather than a
-                  habit, the client can commission hardware from someone else
-                  and hand them the spec. New devices do not require a new app.
-                  And when the wireless transport later moved from Bluetooth
-                  Classic to BLE — because Classic needs Apple's accessory
-                  program on iOS and BLE does not — the codec needed no change
-                  at all. Three of the five layers moved. The one describing
-                  what the bytes <em>mean</em> sat still, because it had never
-                  been coupled to how they travelled.
+                  It paid for itself twice. I later took over the firmware from
+                  the vendor and built on it, which is a great deal easier when
+                  the wire format is a document rather than a habit — and the
+                  same document is what lets the client commission hardware from
+                  someone else entirely. Then I moved the transport from
+                  Bluetooth Classic to BLE, which is what finally let iOS users
+                  in; Classic had effectively made it Android-only. The codec
+                  did not change. Consider what that migration would have looked
+                  like still shipping JSON, into BLE's packet sizes.
                 </p>
                 <p>
                   The rest was less elegant. The native audio player needed
@@ -458,7 +463,7 @@
                   already moved. It was hard to see precisely because each path
                   was right in isolation; the defect lived in the seam between
                   them, and no test that exercised one path could find it. The
-                  fix was to make every path recognise every path's entries.
+                  fix was to make every path recognize every path's entries.
                 </p>
                 <p>
                   The rest was hardening: an internal money-moving endpoint that

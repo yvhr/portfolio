@@ -17,7 +17,7 @@ wrong? I did, about a year ago, and I lost the argument.
 
 Here's the setup. We had an app that pairs with a physical device. You can open
 the app on its own and it will do things — that part matters more than I
-realised at the time — but the reason anyone buys it is the hardware sitting on
+realized at the time — but the reason anyone buys it is the hardware sitting on
 the desk next to it. Money changes hands for the device. The app is the remote
 control.
 
@@ -36,7 +36,7 @@ wrong fact.
 
 The weak point was that _the app works on its own_. Not well, not the way it's
 meant to, but it opens and it does something. And the moment anything unlocks
-behaviour **inside** the app, you are in in-app purchase territory, no matter
+behavior **inside** the app, you are in in-app purchase territory, no matter
 what is plugged in beside it. The hardware wasn't the product as far as review
 was concerned. The hardware was context.
 
