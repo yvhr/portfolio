@@ -1,119 +1,117 @@
 ---
-title: We told Apple our purchases weren't in-app purchases
+title: I appealed to Apple with an analogy. Analogies don't work on lists.
 date: 2026-08-03
 description: >-
-  An app that works on its own but is built for hardware, an appeal that went
-  nowhere, and the receipt validation system I had to write because of it.
-draft: true
+  We argued our app was basically a reader app for a physical product. Apple
+  sent the guidelines back, twice. Here's why we were always going to lose.
+draft: false
 ---
 
-> **Draft.** Two things before this goes out: pull the actual rejection and
-> appeal correspondence (the guideline number is the whole spine of this and
-> I'm not going to guess at it), and decide how much of Apple's wording is safe
-> to quote. Remove `draft: true` when both are settled.
+Have you ever lost an argument you're still fairly sure was reasonable? That's
+where I've been for a while, and I think I've finally worked out why I lost it.
 
-Have you ever had a rejection that was technically correct and still felt
-wrong? I did, about a year ago, and I lost the argument.
+Here's the setup. We make an app that pairs with hardware. The devices are the
+product — you buy a device, the app drives it. Some plug into the audio jack,
+some connect over Bluetooth audio, and the app is the thing that makes them do
+anything at all. Nobody buys the app on its own. They buy the device, and the
+app comes with it.
 
-Here's the setup. We had an app that pairs with a physical device. You can open
-the app on its own and it will do things — that part matters more than I
-realized at the time — but the reason anyone buys it is the hardware sitting on
-the desk next to it. Money changes hands for the device. The app is the remote
-control.
+So when Apple rejected us under **Guideline 3.1.1 — Business, Payments,
+In-App Purchase** — we thought we had a decent answer.
 
-So when it came time to charge for the premium features, we made what felt like
-an obvious argument: this isn't an in-app purchase. What the customer is paying
-for lives outside the app. Apple's own rules carve out room for goods and
-services consumed in the real world — that's why you can pay for a ride or a
-sofa without giving Apple thirty percent.
+### The argument we made
 
-Apple disagreed. We appealed. Apple disagreed again, with less patience.
+Apple has an exemption at **3.1.3(a)** for what they call "reader" apps. The
+idea is reasonable enough: if you bought a book somewhere else, an app that
+only lets you read it shouldn't be forced to push that purchase through in-app
+purchase. The content was acquired elsewhere. The app is just a viewer.
 
-### Where the argument fell apart
+That felt like us. The devices are the product, the app is the companion, and
+whatever the customer is getting they already paid for when they bought the
+hardware. Same shape, we thought. Same exemption.
 
-I still think the reasoning was defensible. I just think I was arguing from the
-wrong fact.
+So we appealed on that basis.
 
-The weak point was that _the app works on its own_. Not well, not the way it's
-meant to, but it opens and it does something. And the moment anything unlocks
-behavior **inside** the app, you are in in-app purchase territory, no matter
-what is plugged in beside it. The hardware wasn't the product as far as review
-was concerned. The hardware was context.
+Apple sent back the guidelines. Not a rebuttal — the guidelines. Same section,
+same wording, as though we hadn't written anything at all. We tried again. They
+sent them again.
 
-If the app had been genuinely inert without the device — a black screen and a
-pairing prompt — I think it's a different conversation. Ours wasn't, and that
-was that.
+At the time this annoyed me a great deal (_I believe my exact words were
+something like "I don't think they even checked it", and I don't believe I said
+it quietly_). In hindsight I suspect they read it fine. There was just nothing
+in it to respond to.
 
-> _(In hindsight the giveaway was that I kept having to explain the argument.
-> Rules you're clearly inside don't need an essay.)_
+### Why we were always going to lose
 
-**TODO:** the exact guideline we cited, the exact wording of the appeal, and
-whatever the reviewer wrote back. That last one is the only part of this post
-nobody else can publish, so it's worth digging out of the archive.
+Here's the part I understand now and didn't then.
 
-### The rejections that were just my fault
+**3.1.3(a) isn't a principle. It's a list.**
 
-While I'm here — the appeal wasn't the only thing that came back. These ones I
-had no argument for, and I suspect they're the ones most people actually hit:
+"Reader" apps aren't defined by the shape of the relationship between an app
+and a thing you already own. They're defined by category — magazines,
+newspapers, books, audio, music, video. That's it. You are either in one of
+those buckets or you are not in any of them.
+
+We weren't arguing that we were in a bucket. We were arguing that we were
+*like* something in a bucket. And you can't reason your way onto an enumerated
+list. There's no principle to extend, because it isn't a principle — it's an
+enumeration, and enumerations don't have edges you can lean on.
+
+Which is also, I think, why the reply was a copy-paste. There was no argument
+to engage with. There was a list, and we weren't on it.
+
+> Rules you're genuinely inside don't need an essay. If you're writing a long
+> explanation of why you qualify, that's usually the tell.
+
+There's a second problem I only spotted later. Reader apps can't sell you
+things in-app either. The exemption isn't "you don't have to use in-app
+purchase" — it's much narrower than that. It's "a purchase that already
+happened somewhere else doesn't have to be re-run through in-app purchase". We
+were selling *inside* the app. Even if we'd somehow been a magazine, that part
+was never going to fly.
+
+### The boring ones
+
+While I'm here — the appeal wasn't the only thing that came back. These I had
+no argument for whatsoever, and I suspect they're the ones most people actually
+hit:
 
 - **3.1.2** — the subscription paywall was missing functional links to Terms of
-  Use and a Privacy Policy, plus the standard auto-renewal language, right at
-  the point of purchase. Not "somewhere in settings". Right there.
-- **3.1.1** — we opened an external membership page on iOS. That's
-  anti-steering, and it's a clean no.
+  Use and a Privacy Policy, plus the auto-renewal language, right at the point
+  of purchase. Not somewhere in settings. Right there.
+- **3.1.1 again, differently** — we opened an external membership page on iOS.
+  That's anti-steering. Clean no.
 - **ITMS-90725** — our binary was built against an SDK that had quietly stopped
-  being acceptable. Nothing to do with the code at all.
+  being acceptable. Nothing to do with our code at all.
 - **iPad multitasking** — you have to declare all four orientations even if you
   enforce portrait at runtime. The app never rotates. The declaration still has
   to be there.
 
 None of those are interesting. All of them cost a submission cycle.
 
-### The part nobody warns you about
+### So I built the thing instead
 
-Here's a problem I've never seen written up properly: **the reviewer doesn't
-have your hardware.**
-
-Think about what that means. The single most important flow in the app —
-pairing, connecting, doing the thing the product exists to do — cannot be
-tested by the person deciding whether the product ships. They open it, they get
-as far as "looking for device", and then they're stuck exactly where any
-customer without the box would be.
-
-No guideline tells you to solve this. You solve it anyway, with screen
-recordings of the whole flow attached to the review notes. Not a demo video —
-an actual, boring capture of pairing working, so the reviewer can see the
-screens they can't reach. It's effectively a submission requirement that exists
-nowhere in the documentation.
-
-**TODO:** dig out what we actually attached, and whether the notes changed
-between submissions.
-
-### So we built the thing instead
-
-Losing meant implementing in-app purchase properly. And "properly" is doing a
-lot of work in that sentence, because the naive version — trust the client,
-unlock the feature — is not validation, it's decoration.
+Losing meant implementing in-app purchase properly, and "properly" is carrying
+a lot of weight in that sentence. The naive version — client says the user
+paid, app unlocks the feature — isn't validation. It's decoration with a
+receipt-shaped hole in it.
 
 Doing it honestly means server-side receipt validation. Verifying Apple's JWS
 chain against pinned roots. Keeping credentials somewhere that isn't a mobile
-binary anyone can unzip. Ingesting purchase webhooks and being able to prove
-where they came from.
+binary anyone can unzip. Taking purchase webhooks and being able to prove where
+they came from.
 
-I could have rented that. There are services that do exactly this and one of
-them was already in use elsewhere in the project, so the cheap path was well
-lit.
+I could have rented that. There are services that do exactly this, and one was
+already in use elsewhere on the project, so the cheap path was well lit.
 
-I wrote [Attesto](https://attesto.nossdev.com) instead, and made it MIT. And
-then [@nosslabs/iap](https://www.npmjs.com/package/@nosslabs/iap) for the
-client side, because once you've built the server half the client half is
-mostly a matter of not making a mess of it (_282 tests later, apparently I was
-worried about making a mess of it_).
+I wrote [Attesto](https://attesto.nossdev.com) instead and made it MIT, then
+[@nosslabs/iap](https://www.npmjs.com/package/@nosslabs/iap) for the client side
+(_282 tests, which tells you roughly how much I trusted myself with this_).
 
-So the honest ending is this: I lost an argument with Apple and it produced two
-pieces of infrastructure that anybody can now use for free. I would not have
-built either one if the appeal had gone my way.
+So: I lost an argument with Apple, and it produced two pieces of infrastructure
+anybody can now use for free. I wouldn't have built either one if the appeal
+had gone my way.
 
-That's not the post I expected to write. Everybody writes the one about getting
+That isn't the post I expected to write. Everyone writes the one about getting
 approved. Nobody writes the one where they were wrong and it cost them a
-quarter, which is a shame, because that one is more useful.
+quarter — which is a shame, because that's the one I'd have wanted to read.
