@@ -1,66 +1,119 @@
 ---
-title: We argued our purchases weren't in-app purchases. Apple disagreed.
-date: 2026-08-02
+title: We told Apple our purchases weren't in-app purchases
+date: 2026-08-03
 description: >-
-  An app that works alone but is built for hardware, an appeal that failed, and
-  the receipt-validation system that failure made us write.
+  An app that works on its own but is built for hardware, an appeal that went
+  nowhere, and the receipt validation system I had to write because of it.
 draft: true
 ---
 
-> Scaffolded, not written. Remove `draft: true` once it says something.
->
-> **Before publishing, pull the actual rejection and appeal correspondence.**
-> The guideline this hinged on is the spine of the piece and it should not be
-> guessed at — verbatim reviewer language is also the part nobody else can
-> publish, which is most of why this post is worth writing at all.
+> **Draft.** Two things before this goes out: pull the actual rejection and
+> appeal correspondence (the guideline number is the whole spine of this and
+> I'm not going to guess at it), and decide how much of Apple's wording is safe
+> to quote. Remove `draft: true` when both are settled.
 
-## The shape of it
+Have you ever had a rejection that was technically correct and still felt
+wrong? I did, about a year ago, and I lost the argument.
 
-The app runs on its own. It is built to run with a device. Both are true, and
-the entire disagreement lives in the gap between them.
+Here's the setup. We had an app that pairs with a physical device. You can open
+the app on its own and it will do things — that part matters more than I
+realised at the time — but the reason anyone buys it is the hardware sitting on
+the desk next to it. Money changes hands for the device. The app is the remote
+control.
 
-The position we took was that what a customer paid for lived outside the app —
-that the app was the remote control, not the product. Apple's position was
-that anything unlocking behaviour inside the app is an in-app purchase,
-regardless of what is sitting on the desk next to it.
+So when it came time to charge for the premium features, we made what felt like
+an obvious argument: this isn't an in-app purchase. What the customer is paying
+for lives outside the app. Apple's own rules carve out room for goods and
+services consumed in the real world — that's why you can pay for a ride or a
+sofa without giving Apple thirty percent.
 
-We appealed. We lost.
+Apple disagreed. We appealed. Apple disagreed again, with less patience.
 
-## What to cover
+### Where the argument fell apart
 
-- **The argument as actually made**, in the words it was made in. Fill from the
-  appeal.
-- **Apple's response**, quoted. There is no substitute for this part.
-- **Why standalone capability was the weak point.** An app that cannot function
-  without its hardware is a different conversation entirely. Ours could, and
-  that is what sank it.
-- **The unambiguous rejections**, worth documenting because they are the ones
-  most people actually hit:
-  - **3.1.2** — a subscription paywall missing functional Terms of Use and
-    Privacy Policy links, plus auto-renewal language, at the point of purchase.
-  - **3.1.1** — opening an external membership page on iOS. Anti-steering.
-  - **ITMS-90725** — a binary built against an SDK that had just stopped being
-    acceptable.
-  - **iPad multitasking** — declare all four orientations even while enforcing
-    portrait at runtime.
-- **The reviewer problem nobody writes about:** the reviewer has no unit. The
-  device-dependent flow cannot be tested. Screen recordings of pairing are how
-  that gap closes, and they are effectively a submission requirement even
-  though no guideline says so.
+I still think the reasoning was defensible. I just think I was arguing from the
+wrong fact.
 
-## The part that matters
+The weak point was that _the app works on its own_. Not well, not the way it's
+meant to, but it opens and it does something. And the moment anything unlocks
+behaviour **inside** the app, you are in in-app purchase territory, no matter
+what is plugged in beside it. The hardware wasn't the product as far as review
+was concerned. The hardware was context.
 
-Losing meant implementing in-app purchase properly, and doing that honestly
-means server-side receipt validation — JWS chain verification against pinned
-roots, credentials that are not sitting in a mobile binary, webhook ingestion
-whose origin you can actually verify.
+If the app had been genuinely inert without the device — a black screen and a
+pairing prompt — I think it's a different conversation. Ours wasn't, and that
+was that.
 
-That could have been rented. [Attesto](https://attesto.nossdev.com) got written
-instead, MIT, along with
-[@nosslabs/iap](https://www.npmjs.com/package/@nosslabs/iap) for the client
-side.
+> _(In hindsight the giveaway was that I kept having to explain the argument.
+> Rules you're clearly inside don't need an essay.)_
 
-Which is a better ending than winning would have been: the appeal failing is
-the reason two pieces of infrastructure exist that anyone can now use. Worth
-saying plainly rather than dressing up. Nobody writes the post about the appeal
-they lost — which is exactly why it is worth reading.
+**TODO:** the exact guideline we cited, the exact wording of the appeal, and
+whatever the reviewer wrote back. That last one is the only part of this post
+nobody else can publish, so it's worth digging out of the archive.
+
+### The rejections that were just my fault
+
+While I'm here — the appeal wasn't the only thing that came back. These ones I
+had no argument for, and I suspect they're the ones most people actually hit:
+
+- **3.1.2** — the subscription paywall was missing functional links to Terms of
+  Use and a Privacy Policy, plus the standard auto-renewal language, right at
+  the point of purchase. Not "somewhere in settings". Right there.
+- **3.1.1** — we opened an external membership page on iOS. That's
+  anti-steering, and it's a clean no.
+- **ITMS-90725** — our binary was built against an SDK that had quietly stopped
+  being acceptable. Nothing to do with the code at all.
+- **iPad multitasking** — you have to declare all four orientations even if you
+  enforce portrait at runtime. The app never rotates. The declaration still has
+  to be there.
+
+None of those are interesting. All of them cost a submission cycle.
+
+### The part nobody warns you about
+
+Here's a problem I've never seen written up properly: **the reviewer doesn't
+have your hardware.**
+
+Think about what that means. The single most important flow in the app —
+pairing, connecting, doing the thing the product exists to do — cannot be
+tested by the person deciding whether the product ships. They open it, they get
+as far as "looking for device", and then they're stuck exactly where any
+customer without the box would be.
+
+No guideline tells you to solve this. You solve it anyway, with screen
+recordings of the whole flow attached to the review notes. Not a demo video —
+an actual, boring capture of pairing working, so the reviewer can see the
+screens they can't reach. It's effectively a submission requirement that exists
+nowhere in the documentation.
+
+**TODO:** dig out what we actually attached, and whether the notes changed
+between submissions.
+
+### So we built the thing instead
+
+Losing meant implementing in-app purchase properly. And "properly" is doing a
+lot of work in that sentence, because the naive version — trust the client,
+unlock the feature — is not validation, it's decoration.
+
+Doing it honestly means server-side receipt validation. Verifying Apple's JWS
+chain against pinned roots. Keeping credentials somewhere that isn't a mobile
+binary anyone can unzip. Ingesting purchase webhooks and being able to prove
+where they came from.
+
+I could have rented that. There are services that do exactly this and one of
+them was already in use elsewhere in the project, so the cheap path was well
+lit.
+
+I wrote [Attesto](https://attesto.nossdev.com) instead, and made it MIT. And
+then [@nosslabs/iap](https://www.npmjs.com/package/@nosslabs/iap) for the
+client side, because once you've built the server half the client half is
+mostly a matter of not making a mess of it (_282 tests later, apparently I was
+worried about making a mess of it_).
+
+So the honest ending is this: I lost an argument with Apple and it produced two
+pieces of infrastructure that anybody can now use for free. I would not have
+built either one if the appeal had gone my way.
+
+That's not the post I expected to write. Everybody writes the one about getting
+approved. Nobody writes the one where they were wrong and it cost them a
+quarter, which is a shame, because that one is more useful.
