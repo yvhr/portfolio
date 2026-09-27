@@ -8,10 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:clean": "rm -rf dist && npm run build",
-    "lint": "eslint src/**/*.{html,js}",
-    "lint:fix": "eslint src/**/*.{html,js} --fix",
-    "format": "prettier --write src/**/*.{html,css,js}",
-    "format:check": "prettier --check src/**/*.{html,css,js}"
+    "lint": "eslint 'src/**/*.{html,js}'",
+    "lint:fix": "eslint 'src/**/*.{html,js}' --fix",
+    "format": "prettier --write 'src/**/*.{html,css,js}'",
+    "format:check": "prettier --check 'src/**/*.{html,css,js}'"
   },
   "keywords": [
     "portfolio"
