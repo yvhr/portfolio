@@ -47,7 +47,8 @@ module.exports = {
       },
       rules: {
         'indent': ['error', 2],
-        'quotes': ['error', 'single'],
+        // avoidEscape: Prettier keeps "don't" in double quotes rather than escape it
+        'quotes': ['error', 'single', { avoidEscape: true }],
         'semi': ['error', 'always'],
         'no-unused-vars': 'warn',
         'no-console': 'warn',
