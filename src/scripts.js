@@ -5,7 +5,7 @@
  * The theme is already resolved by the inline script in <head> before first
  * paint; this only wires the toggle and keeps the label in sync.
  *
- * Loaded by both index.html and vertex.html, so every lookup is guarded —
+ * Loaded by index.html, vertex.html and clio/privacy.html, so every lookup is guarded —
  * a change to one page must not throw on the other.
  */
 

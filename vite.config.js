@@ -44,6 +44,8 @@ export default defineConfig({
         main: 'src/index.html',
         // The easter egg. Keep this input — /vertex is served from it.
         vertex: 'src/vertex.html',
+        // Clio's privacy policy. Keep this input — /clio/privacy is served from it.
+        clioPrivacy: 'src/clio/privacy.html',
       },
     },
     minify: 'esbuild',

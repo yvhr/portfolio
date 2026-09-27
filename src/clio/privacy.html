@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Clio</title>
+    <meta
+      name="description"
+      content="Privacy policy for Clio, a personal assistant tool used solely by its owner."
+    />
+    <link rel="canonical" href="https://josephharveyangeles.com/clio/privacy" />
+
+    <!-- Resolve the theme before first paint so there is no flash. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
+    <meta
+      name="theme-color"
+      content="#1c1a17"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f4f1ea"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      href="/fonts/newsreader-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <!-- Same running head as the writing pages. -->
+      <header class="masthead mono">
+        <div class="masthead-left">
+          <span class="pmark" aria-hidden="true"></span>
+          <a class="masthead-home" href="/">Joseph Harvey Angeles</a>
+        </div>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-live="polite"
+        >
+          <span id="themeLabel">Day edition</span>
+        </button>
+      </header>
+
+      <main>
+        <article class="section post">
+          <div class="row">
+            <div class="gutter">
+              <div class="mono kicker">Clio</div>
+            </div>
+            <div class="col">
+              <h1 class="post-title">Privacy Policy — Clio</h1>
+              <div class="post-body">
+                <p>
+                  Clio is a personal assistant tool used solely by its owner,
+                  Joseph Harvey Angeles. It accesses the owner's own Google
+                  account data (such as Gmail) only to perform tasks the owner
+                  requests. No data is sold, shared with third parties, or used
+                  for advertising. Data is processed on the owner's own server
+                  and is not made available to anyone else.
+                </p>
+                <p>
+                  Contact:
+                  <a href="mailto:josephharveyangeles@gmail.com"
+                    >josephharveyangeles@gmail.com</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <footer class="colophon mono">
+        <a href="/">← Back to the site</a>
+      </footer>
+    </div>
+
+    <script type="module" src="../scripts.js"></script>
+  </body>
+</html>
